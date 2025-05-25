@@ -1,44 +1,72 @@
 <?php
+
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\Module;
+use App\Models\ModulePoint;
+use App\Models\UserModule;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index(): View // Ini akan selalu menampilkan view, bukan redirect
+    public function index(): View
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
-        // Cek status modul user
-        if ($user->hasActiveModule()) {
-            // Jika modul sudah aktif (approved), tampilkan dashboard dengan modul aktif
-            $activeModule = $user->modules()->where('status_approved', 'approved')->latest()->first();
-            return view('dashboard', [ // Asumsi 'dashboard.blade.php' adalah untuk modul aktif
-                'activeModule' => $activeModule
-            ]);
-        } elseif ($user->hasPendingModule()) {
-            // Jika modul pending, tampilkan dashboard dengan status pending
-            $pendingModule = $user->modules()->where('status_approved', 'pending')->latest()->first();
-            return view('dashboard', [ // Atau Anda bisa buat view terpisah seperti 'dashboard_pending.blade.php'
-                'pendingModule' => $pendingModule,
-                'statusMessage' => 'Modul Anda telah dipilih dan sedang menunggu persetujuan admin.'
-            ]);
-        } else {
-            // Jika user belum punya modul (baik aktif maupun pending), arahkan untuk memilih
-            return view('dashboard', [ // Asumsi 'dashboard.blade.php' bisa menampilkan tombol 'Pilih Modul'
-                'noModule' => true,
-                'statusMessage' => 'Anda belum memilih modul. Silakan pilih modul untuk memulai.'
-            ]);
+        $approvedModules = collect();
+        $pendingModule = null;
+        $noModuleSelected = true;
+
+        $userModulesCollection = $user->modules()->with('module')->get();
+
+        if ($userModulesCollection->isNotEmpty()) {
+            $approvedModules = $userModulesCollection->filter(function($userModule) {
+                if ($userModule->status_approved === 'approved') {
+                    if ($userModule->module_type === 'lifetime') {
+                        return true;
+                    } elseif ($userModule->module_type === 'yearly' && $userModule->expiry_date && $userModule->expiry_date->isFuture()) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+
+            $pendingModule = $userModulesCollection->where('status_approved', 'pending')->first();
+
+            if ($approvedModules->isNotEmpty() || !is_null($pendingModule)) {
+                $noModuleSelected = false;
+            }
         }
+
+        return view('dashboard', compact('approvedModules', 'pendingModule', 'noModuleSelected'));
     }
 
-    // Metode moduleStatus ini TIDAK LAGI DIPAKAI untuk redirect dari DashboardController::index
-    // Tapi bisa tetap ada jika ada rute langsung ke sana.
-    // Namun, jika semua penanganan status ada di index(), metode ini bisa dipertimbangkan untuk dihapus
-    // atau diubah untuk tujuan lain.
-    // public function moduleStatus(): View
-    // {
-    //     // ... (kode yang Anda punya sebelumnya di sini)
-    // }
+    /**
+     * Menampilkan detail satu modul untuk user (termasuk points-nya).
+     * Sekarang menerima model Module berdasarkan ID secara default.
+     * @param  \App\Models\Module  $module
+     */
+    public function showModule(Module $module): View // <--- TIDAK PERLU DIUBAH, Laravel akan bind berdasarkan ID secara default
+    {
+        $user = Auth::user();
+
+        $hasAccess = $user->modules()
+                         ->where('module_id', $module->id)
+                         ->where('status_approved', 'approved')
+                         ->where(function($query) {
+                             $query->whereNull('expiry_date')
+                                   ->orWhere('expiry_date', '>', now());
+                         })
+                         ->exists();
+
+        if (!$hasAccess) {
+            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki akses ke modul ini atau modul Anda sudah kedaluwarsa.');
+        }
+
+        $points = $module->points()->where('is_active', true)->orderBy('order')->get();
+
+        return view('user.modules.show', compact('module', 'points'));
+    }
 }

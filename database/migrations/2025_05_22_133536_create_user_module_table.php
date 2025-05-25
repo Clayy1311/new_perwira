@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
               // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('module_type', ['lifetime', 'monthly']);
-            $table->date('expiry_date')->nullable();
+            $table->enum('module_type', ['lifetime', 'yearly']);
             $table->string('payment_method');
             $table->decimal('amount', 10, 2);
             $table->string('status')->default('active');
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_module');
+        Schema::dropIfExists('user_modules');
     }
 };
