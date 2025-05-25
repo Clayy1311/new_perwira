@@ -6,6 +6,7 @@ use App\Http\Controllers\PaymentController; // Controller untuk Pembayaran
 use App\Http\Controllers\DashboardController; // Controller Dashboard Pengguna & showModule
 use App\Http\Controllers\Admin\ModuleApprovalController; // Controller untuk Approval Modul Admin
 use App\Http\Controllers\Admin\ModulePointController; // Controller untuk CRUD Point Modul Admin
+use App\Http\Controllers\ModuleDetailController;
 
 // Pastikan mengimport namespace 'User' jika kamu memiliki PaymentStatusController di dalamnya
 // Jika tidak, hapus saja baris ini:
@@ -65,6 +66,9 @@ Route::middleware(['auth', 'verified', 'payment.check'])->group(function () {
 
     // Dashboard Pengguna
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+//menampilkan points
+Route::get('/points/{module}', [ModuleDetailController::class, 'show'])->name('detail.points'); // <--- Diperbarui
+
 
     // Rute untuk Menampilkan Detail Modul dan Poin-poinnya
     // ***PERBAIKAN UTAMA DI SINI: MENGGUNAKAN ID MODUL BUKAN SLUG***

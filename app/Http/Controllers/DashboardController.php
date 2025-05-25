@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $userModulesCollection = $user->modules()->with('module')->get();
 
         if ($userModulesCollection->isNotEmpty()) {
-            $approvedModules = $userModulesCollection->filter(function($userModule) {
+            $userModuleHistory = $userModulesCollection->filter(function($userModule) {
                 if ($userModule->status_approved === 'approved') {
                     if ($userModule->module_type === 'lifetime') {
                         return true;
@@ -35,8 +35,11 @@ class DashboardController extends Controller
 
             $pendingModule = $userModulesCollection->where('status_approved', 'pending')->first();
 
-            if ($approvedModules->isNotEmpty() || !is_null($pendingModule)) {
+            if ($userModuleHistory->isNotEmpty() || !is_null($pendingModule)) {
                 $noModuleSelected = false;
+            }
+            if($userModuleHistory->isNotEmpty()){
+                $approvedModules = Module::all();
             }
         }
 
@@ -69,4 +72,5 @@ class DashboardController extends Controller
 
         return view('user.modules.show', compact('module', 'points'));
     }
+   
 }

@@ -38,6 +38,7 @@ class ModuleController extends Controller
         Module::create([
             'name' => $request->name,
             'description' => $request->description,
+            
         ]);
 
         return redirect()->route('admin.modules.index')->with('success', 'Modul berhasil ditambahkan!');
