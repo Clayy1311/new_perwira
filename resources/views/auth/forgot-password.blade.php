@@ -1,8 +1,9 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+    <x-auth-card>
+    <div class="mb-4 text-sm text-white">
         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
     </div>
-
+   
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -22,4 +23,5 @@
             </x-primary-button>
         </div>
     </form>
+</x-auth-card>
 </x-guest-layout>

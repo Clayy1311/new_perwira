@@ -843,7 +843,7 @@
               Apakah trading crypto pasti akan mendapatkan keuntungan?
             </div>
             <div class="answer mt-[20px]">
-              Tidak
+              -
             </div>
           </div>
           <div class="box-action flex justify-center flex-col items-center w-[100%] h-[100%] flex justify-center items-center">
@@ -857,7 +857,7 @@
               Berapa modal yang besar untuk trading crypto?
             </div>
             <div class="answer mt-[20px]">
-              Tidak
+              -
             </div>
           </div>
           <div class="box-action flex justify-center flex-col items-center w-[100%] h-[100%] flex justify-center items-center">
@@ -871,7 +871,7 @@
               Saya masih awam trading crypto apakah bisa join perwira crypto?
             </div>
             <div class="answer mt-[20px]">
-              Tidak
+              -
             </div>
           </div>
           <div class="box-action flex justify-center flex-col items-center w-[100%] h-[100%] flex justify-center items-center">
@@ -885,7 +885,7 @@
               Apakah bisa menjadi kaya dari trading crypto?
             </div>
             <div class="answer mt-[20px]">
-              Tidak
+              -
             </div>
           </div>
           <div class="box-action flex justify-center flex-col items-center w-[100%] h-[100%] flex justify-center items-center">

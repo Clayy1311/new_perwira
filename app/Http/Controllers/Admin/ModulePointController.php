@@ -82,7 +82,7 @@ class ModulePointController extends Controller
         if ($point->module_id !== $module->id) {
             abort(404);
         }
-        return view('admin.module_points.edit', compact('module', 'point'));
+        return view('admin.module_points.form_edit', compact('module', 'point'));
     }
 
     /**

@@ -35,7 +35,7 @@ class ModuleApprovalController extends Controller
         ]);
 
         // Buat pesan sukses
-        $message = 'Modul "' . ($userModule->module->name ?? 'Modul Tidak Ditemukan') . '" untuk user ' . ($userModule->user->name ?? 'Tidak Diketahui') . ' berhasil disetujui.';
+        $message = 'Modul "'  . '" untuk user ' . ($userModule->user->name ?? 'Tidak Diketahui') . ' berhasil disetujui.';
 
         if ($expiryDate) {
             $message .= ' Aktif hingga: ' . $expiryDate->format('d M Y');
