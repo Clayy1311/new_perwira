@@ -52,7 +52,7 @@ class ModulePointController extends Controller
 
         // Jika ada file yang diupload
         if ($request->hasFile('content_file')) {
-            $path = $request->file('content_file')->store('public/module_point_files');
+            $path = $request->file('content_file')->store('images/modules', 'public');
             $contentUrl = Storage::url($path); // Dapatkan URL publik dari file yang disimpan
         } elseif ($request->input('type') == 'text') {
             $contentUrl = null; // Pastikan URL kosong jika tipe teks

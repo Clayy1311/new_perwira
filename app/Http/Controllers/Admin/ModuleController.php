@@ -13,7 +13,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $modules = Module::paginate(10);
+        $modules = Module::paginate(5);
         return view('admin.modules.index', compact('modules'));
     }
 
@@ -33,12 +33,19 @@ class ModuleController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:modules,name',
             'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg,gif|max:2048'
         ]);
-
+    
+        $imagePath = null;
+    
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images/modules', 'public');
+        }
+    
         Module::create([
             'name' => $request->name,
             'description' => $request->description,
-            
+            'image' => $imagePath
         ]);
 
         return redirect()->route('admin.modules.index')->with('success', 'Modul berhasil ditambahkan!');

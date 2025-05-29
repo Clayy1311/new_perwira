@@ -26,6 +26,23 @@
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
+ {{-- Divider --}}
+ <div class="flex items-center justify-center mt-6">
+    <div class="w-full border-t border-gray-300 dark:border-gray-700"></div>
+    <span class="px-2 text-gray-500 dark:text-gray-400 text-sm">OR</span>
+    <div class="w-full border-t border-gray-300 dark:border-gray-700"></div>
+</div>
+
+{{-- Tombol Daftar dengan Google --}}
+{{-- Tombol Daftar dengan Google --}}
+<div class="flex items-center justify-center mt-6">
+    <a href="{{ route('auth.google.redirect') }}"
+       class="flex items-center gap-3 px-6 py-3 bg-gradient-to-br from-blue-950 via-blue-950 to-blue-600
+text-white rounded-lg shadow-md hover:bg-gray-100 transition duration-200 ease-in-out font-medium">
+        <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google Logo" class="w-5 h-5">
+        <span>Continue with Google</span>
+    </a>
+</div>
 
         <!-- Remember Me -->
         <div class="block mt-4">

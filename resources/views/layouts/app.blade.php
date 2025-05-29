@@ -10,12 +10,12 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div class="min-h-screen bg-[#021028] dark:bg-black">
         @include('layouts.navigation')
 
         <!-- Dynamic Header Slot -->
@@ -28,7 +28,7 @@
         @endif
 
         <!-- Main Content Slot -->
-        <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main class="w-full">
             {{ $slot }}
         </main>
 
@@ -42,5 +42,8 @@
 
     <!-- Optional Scripts Slot -->
     @stack('scripts')
+    
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+<script src="https://unpkg.com/videojs-youtube/dist/Youtube.min.js"></script>
 </body>
 </html>
