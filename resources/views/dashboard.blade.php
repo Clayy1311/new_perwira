@@ -17,10 +17,7 @@
                     {{-- Tampilkan view sesuai kondisi --}}
                     @if($approvedModules->isNotEmpty())
                     @include('user.approved_module', ['approvedModules' => $approvedModules])
-
-                    @elseif($pendingModule)
-                        @include('user.pending_module', ['pendingModule' => $pendingModule])
-
+                    
                     @elseif($noModuleSelected)
                         @include('user.no_module')
                     @endif

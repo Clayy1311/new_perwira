@@ -38,7 +38,7 @@ class AuthenticatedSessionController extends Controller
         // PRIORITAS 2: Jika BUKAN admin, maka arahkan ke dashboard pengguna biasa.
         // DashboardController (yang sudah kita perbaiki) akan menangani logika lebih lanjut
         // (apakah user approved, pending, atau perlu memilih modul).
-        return redirect()->intended(route('dashboard'));
+        return redirect()->intended(route('membership'));
     }
 
     /**

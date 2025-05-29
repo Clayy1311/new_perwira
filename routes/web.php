@@ -87,7 +87,21 @@ route::delete('/admin/news{news}/destroy', [NewsController::class, 'destroy'])->
    
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Halaman pilih membership
+    Route::get('/membership', function () {
+        return view('membership'); // atau nama view yang Anda gunakan
+    })->name('membership');
+    
+    // Route payment yang sudah ada
+    Route::post('/pay', [PaymentController::class, 'createTransaction'])->name('payment');
+});
+// Callback Midtrans (TANPA middleware auth)
+Route::post('/midtrans/callback', [PaymentController::class, 'handleCallback']);
 
+// routes/web.php atau api.php
+Route::get('/sync-status/{orderId}', [PaymentController::class, 'syncStatus']);
+Route::get('/sync-all-pending', [PaymentController::class, 'syncAllPendingOrders']);
 // Grup Rute Pengguna Terautentikasi dan Terverifikasi
 Route::middleware(['auth', 'verified', 'payment.check'])->group(function () {
 

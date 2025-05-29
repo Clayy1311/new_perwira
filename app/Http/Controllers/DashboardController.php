@@ -11,7 +11,7 @@ use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index(): View
+    public function index()
     {
         $user = Auth::user();
 
@@ -24,9 +24,9 @@ class DashboardController extends Controller
         if ($userModulesCollection->isNotEmpty()) {
             $userModuleHistory = $userModulesCollection->filter(function($userModule) {
                 if ($userModule->status_approved === 'approved') {
-                    if ($userModule->module_type === 'lifetime') {
+                    if ($userModule->module_type === 'eternal') {
                         return true;
-                    } elseif ($userModule->module_type === 'yearly' && $userModule->expiry_date && $userModule->expiry_date->isFuture()) {
+                    } elseif ($userModule->module_type === 'wolfpack' && $userModule->expiry_date && $userModule->expiry_date->isFuture()) {
                         return true;
                     }
                 }
@@ -38,12 +38,17 @@ class DashboardController extends Controller
             if ($userModuleHistory->isNotEmpty() || !is_null($pendingModule)) {
                 $noModuleSelected = false;
             }
+            
             if($userModuleHistory->isNotEmpty()){
                 $approvedModules = Module::all();
             }
+        }else{
+              return  redirect('/membership');
         }
 
-        return view('dashboard', compact('approvedModules', 'pendingModule', 'noModuleSelected'));
+        
+
+        return view('user.approved_module', compact('approvedModules'));
     }
 
     /**

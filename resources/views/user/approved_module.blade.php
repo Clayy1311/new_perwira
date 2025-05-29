@@ -5,7 +5,7 @@
     File ini akan di-include ke dalam layout utama (app.blade.php) Anda.
     Hapus juga <script src="https://cdn.tailwindcss.com"></script> karena Tailwind sudah dikelola oleh Vite di proyek Laravel Breeze Anda.
 --}}
-
+<x-app-layout>
 <div class="flex min-h-screen"> {{-- Tambahkan min-h-screen untuk memastikan flexbox bekerja dengan baik --}}
 
     <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
@@ -196,3 +196,4 @@
         });
     </script>
 @endpush
+</x-app-layout>

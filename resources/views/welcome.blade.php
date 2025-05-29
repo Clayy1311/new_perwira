@@ -704,9 +704,11 @@
                 </ul>
               </div>
               <div class="card-footer mb-[20px] flex justify-center items-center font-open-sans text-xl">
-                <button class="font-bold min-w-[68px] bg-gradient-to-r from-[#528fff] to-[#07368e] px-[20px] py-[10px] rounded-[5px]">
-                  DAPATKAN AKSES
-                </button>
+                <a href="/login">
+  <button class="font-bold min-w-[68px] bg-gradient-to-r from-[#528fff] to-[#07368e] px-[20px] py-[10px] rounded-[5px]">
+    DAPATKAN AKSES
+  </button>
+</a>
               </div>
             </div>
           </div>
