@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Carbon\Carbon;
+use App\Notifications\VerifyEmailNotification;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -96,4 +97,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(UserModuleProgress::class);
     }
+
+    public function sendEmailVerificationNotification()
+{
+    $this->notify(new VerifyEmailNotification);
+}
 }

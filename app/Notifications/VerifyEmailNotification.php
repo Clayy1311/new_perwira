@@ -6,6 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\HtmlString;
+
 
 class VerifyEmailNotification extends Notification
 {
@@ -34,10 +37,20 @@ class VerifyEmailNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+          $verificationUrl = URL::temporarySignedRoute(
+        'verification.verify',
+        now()->addMinutes(60),
+        ['id' => $notifiable->getKey(), 'hash' => sha1($notifiable->getEmailForVerification())]
+    );
+
+    return (new MailMessage)
+        ->subject('Verifikasi Email Kamu - Perwira Crypto')
+        ->greeting('Halo, ' . $notifiable->name)
+        
+        ->line('Terima kasih telah mendaftar di Perwira Crypto!')
+        ->line('Klik tombol di bawah untuk memverifikasi email kamu.')
+        ->action('Verifikasi Sekarang', $verificationUrl)
+        ->line('Jika kamu tidak merasa mendaftar, abaikan email ini.');
     }
 
     /**
