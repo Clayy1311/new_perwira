@@ -34,7 +34,7 @@
                   WOLF PACK
                 </h4>
                 <p class="mb-[20px] text-white bg-clip-text bg-gradient-to-r from-[#a3d4ff] to-[#1d63bf] drop-shadow-[0_0_6px_rgba(15,91,203,0.4)] leading-relaxed drop-shadow-[0_0_6px_rgba(0,0,0,0.4)] ">
-                1 Tahun
+                1 Tahun 
                 </p>
                 <hr class="h-[1px] w-full bottom-[50px] bg-gradient-to-r from-gray-800 via-blue-500 to-gray-800 border-0 rounded-full my-6">
               </div>
