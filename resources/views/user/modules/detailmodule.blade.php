@@ -19,6 +19,19 @@
                 </button>
             </div>
 
+            {{--- TOMBOL KEMBALI DITAMBAHKAN DI SINI ---}}
+            <div class="mb-6"> {{-- Margin bawah untuk spasi --}}
+            <a href="{{ route('dashboard') }}"
+                   class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition ease-in-out duration-150">
+                    <svg class="-ml-1 mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Kembali ke Modul Saya
+                </a>
+            </div>
+            {{-------------------------------------------}}
+
+
             <h1 class="text-gray-300 text-3xl font-bold mb-6">{{ $module->name ?? 'Nama Modul' }}</h1>
             <p class="text-gray-400 mb-8">{{ $module->description ?? '' }}</p>
 
@@ -105,7 +118,7 @@
                             <button
                                 onclick="document.getElementById('konten-media').classList.remove('hidden'); this.classList.add('hidden');"
                                 class="mb-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-                                Mulai Belajar!!
+                                Start Class!
                             </button>
                         @endif
 
@@ -229,67 +242,67 @@
             }
 
             document.addEventListener('DOMContentLoaded', function() {
-                const toggleButton = document.getElementById('toggleSidebar');
-                const sidebar = document.getElementById('sidebar');
-                const closeButton = document.getElementById('closeSidebar');
-                const sidebarOverlay = document.getElementById('sidebar-overlay');
+                // const toggleButton = document.getElementById('toggleSidebar');
+                // const sidebar = document.getElementById('sidebar');
+                // const closeButton = document.getElementById('closeSidebar');
+                // const sidebarOverlay = document.getElementById('sidebar-overlay');
                 const markCompleteBtn = document.getElementById('markCompleteBtn');
 
-                function openSidebar() {
-                    sidebar.classList.remove('-translate-x-full');
-                    sidebarOverlay.classList.remove('hidden');
-                }
+                // function openSidebar() {
+                //     sidebar.classList.remove('-translate-x-full');
+                //     sidebarOverlay.classList.remove('hidden');
+                // }
 
-                function closeSidebar() {
-                    sidebar.classList.add('-translate-x-full');
-                    sidebarOverlay.classList.add('hidden');
-                }
+                // function closeSidebar() {
+                //     sidebar.classList.add('-translate-x-full');
+                //     sidebarOverlay.classList.add('hidden');
+                // }
 
-                if (toggleButton) {
-                    toggleButton.addEventListener('click', openSidebar);
-                }
+                // if (toggleButton) {
+                //     toggleButton.addEventListener('click', openSidebar);
+                // }
 
-                if (closeButton) {
-                    closeButton.addEventListener('click', closeSidebar);
-                }
+                // if (closeButton) {
+                //     closeButton.addEventListener('click', closeSidebar);
+                // }
 
-                if (sidebarOverlay) {
-                    sidebarOverlay.addEventListener('click', closeSidebar);
-                }
+                // if (sidebarOverlay) {
+                //     sidebarOverlay.addEventListener('click', closeSidebar);
+                // }
 
-                function checkSidebarState() {
-                    if (window.innerWidth >= 768) {
-                        sidebar.classList.remove('-translate-x-full');
-                        sidebar.classList.add('static', 'block');
-                        if (sidebarOverlay) sidebarOverlay.classList.add('hidden');
-                    } else {
-                        sidebar.classList.add('-translate-x-full');
-                        sidebar.classList.remove('static', 'block');
-                    }
-                }
+                // function checkSidebarState() {
+                //     if (window.innerWidth >= 768) {
+                //         sidebar.classList.remove('-translate-x-full');
+                //         sidebar.classList.add('static', 'block');
+                //         if (sidebarOverlay) sidebarOverlay.classList.add('hidden');
+                //     } else {
+                //         sidebar.classList.add('-translate-x-full');
+                //         sidebar.classList.remove('static', 'block');
+                //     }
+                // }
 
-                checkSidebarState();
-                window.addEventListener('resize', checkSidebarState);
+                // checkSidebarState();
+                // window.addEventListener('resize', checkSidebarState);
 
-                const currentPathname = window.location.pathname;
-                document.querySelectorAll('.space-y-2 a').forEach(link => {
-                    const linkPathname = new URL(link.href).pathname;
+                // const currentPathname = window.location.pathname;
+                // document.querySelectorAll('.space-y-2 a').forEach(link => {
+                //     const linkPathname = new URL(link.href).pathname;
 
-                    if (linkPathname === currentPathname || (linkPathname === '/' && currentPathname ===
-                            '/dashboard')) {
-                        link.classList.remove('text-gray-300', 'hover:text-white', 'hover:bg-gray-800');
-                        link.classList.add('bg-gray-700', 'text-white');
-                    } else {
-                        link.classList.remove('bg-gray-700', 'text-white');
-                        link.classList.add('text-gray-300', 'hover:text-white', 'hover:bg-gray-800');
-                    }
+                //     if (linkPathname === currentPathname || (linkPathname === '/' && currentPathname ===
+                //             '/dashboard')) {
+                //         link.classList.remove('text-gray-300', 'hover:text-white', 'hover:bg-gray-800');
+                //         link.classList.add('bg-gray-700', 'text-white');
+                //     } else {
+                //         link.classList.remove('bg-gray-700', 'text-white');
+                //         link.classList.add('text-gray-300', 'hover:text-white', 'hover:bg-gray-800');
+                //     }
 
-                    link.addEventListener('click', function() {
-                        if (window.innerWidth < 768) {
-                            closeSidebar();
-                        }
-                    });
-                });
+                //     link.addEventListener('click', function() {
+                //         if (window.innerWidth < 768) {
+                //             closeSidebar();
+                //         }
+                //     });
+                // });
 
                 // LOGIKA UNTUK TOMBOL "Tandai Selesai"
                 console.log('DOM Content Loaded. Checking for markCompleteBtn...');

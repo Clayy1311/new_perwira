@@ -9,18 +9,15 @@
 
    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
-    <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-[#021028] dark:bg-black">
         @include('layouts.navigation')
 
-        <!-- Dynamic Header Slot -->
         @if(isset($header))
             <header class="bg-white dark:bg-gray-800 shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -29,12 +26,10 @@
             </header>
         @endif
 
-        <!-- Main Content Slot -->
         <main class="w-full">
             {{ $slot }}
         </main>
 
-        <!-- Footer Slot -->
         @if(isset($footer))
             <footer class="bg-white dark:bg-gray-800 mt-8">
                 {{ $footer }}
@@ -42,10 +37,13 @@
         @endif
     </div>
 
-    <!-- Optional Scripts Slot -->
+    {{-- PENTING: Pindahkan Video.js scripts ke SINI, SEBELUM @stack('scripts') --}}
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+    <script src="https://unpkg.com/videojs-youtube/dist/Youtube.min.js"></script>
+    {{-- Optional: jika Anda juga menggunakan videojs-http-streaming, masukkan di sini juga --}}
+    {{-- <script src="https://unpkg.com/@videojs/http-streaming@3.7.0/dist/videojs-http-streaming.min.js"></script> --}}
+
     @stack('scripts')
     
-    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
-<script src="https://unpkg.com/videojs-youtube/dist/Youtube.min.js"></script>
 </body>
 </html>
